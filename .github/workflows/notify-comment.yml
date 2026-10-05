@@ -1,0 +1,48 @@
+name: Notify on comment
+
+on:
+  issues:
+    types: [opened]
+  issue_comment:
+    types: [created]
+
+permissions:
+  issues: write
+
+jobs:
+  notify:
+    # Skip bot actors: utterances-bot opens the tracking issue itself and
+    # github-actions must never loop on its own comments.
+    if: github.actor != 'github-actions[bot]' && github.actor != 'utterances[bot]' && github.actor != 'utterances-bot'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout kese-comments (this repo)
+        uses: actions/checkout@v4
+
+      - name: Checkout kese-blog
+        uses: actions/checkout@v4
+        with:
+          repository: kese/kese-blog
+          token: ${{ secrets.BLOG_ACCESS_TOKEN }}
+          path: blog
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Find author and notify
+        uses: actions/github-script@v7
+        env:
+          BLOG_ACCESS_TOKEN: ${{ secrets.BLOG_ACCESS_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          BLOG_PATH: blog
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { notify } = require('./scripts/notify-comment.js');
+            await notify(context, github);

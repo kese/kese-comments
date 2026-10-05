@@ -1,0 +1,15 @@
+{
+  "name": "kese-comments",
+  "version": "1.0.0",
+  "description": "utterances comment store + notification/moderation automation for sof.kr (kese blog)",
+  "license": "MIT",
+  "private": false,
+  "scripts": { "test": "node scripts/notify-comment.js" },
+  "keywords": ["github", "actions", "notifications", "utterances"],
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "@octokit/rest": "^20.0.0",
+    "dotenv": "^17.2.3",
+    "js-yaml": "^4.1.0"
+  }
+}
