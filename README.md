@@ -9,19 +9,19 @@
 2. utterances가 이 저장소(`kese/kese-comments`, 공개)에 포스트별 Issue를 만들고 댓글을 Issue 댓글로 저장
 3. `issue_comment.created` 이벤트로 GitHub Actions 워크플로우 실행
    - Issue 제목(`/blog/<slug>/`)에서 포스트 slug 추출
-   - `kese/kese-blog`의 `content/posts/<slug>/index.md`에서 포스트와 `author` 필드 확인
+   - `kese/kesekr`의 `content/posts/<slug>/index.md`에서 포스트와 `author` 필드 확인
    - `content/authors.yaml`에서 작성자 GitHub 계정 조회
 4. AI 댓글 분석 및 모더레이션 (`GEMINI_API_KEY` 설정 시)
    - Gemini로 댓글 분류·감정·Toxicity Level(0-5) 분석, 추천 답변 2-3개 생성
    - Level 4+ 악성 댓글 즉시 삭제 (증거는 알림에 보존)
-5. `kese/kese-blog`에 알림 Issue 생성 (같은 포스트 Issue가 열려 있으면 댓글로 추가 — 중복 방지)
+5. `kese/kesekr`에 알림 Issue 생성 (같은 포스트 Issue가 열려 있으면 댓글로 추가 — 중복 방지)
    - Level 3+ 는 `moderation` 라벨 + 관리자 멘션
 6. 월별 `[Metrics] YYYY-MM 댓글 알림 통계` Issue에 이벤트 기록
 
 ## 왜 공개 저장소인가
 
 utterances는 로그인하지 않은 방문자도 댓글을 **읽을 수 있어야** 하므로 저장소가 반드시 공개여야 한다.
-댓글 원문은 어차피 블로그에 공개 표시되는 내용이고, 알림·AI 분석 결과·메트릭은 비공개 `kese-blog` 저장소에 기록된다.
+댓글 원문은 어차피 블로그에 공개 표시되는 내용이고, 알림·AI 분석 결과·메트릭은 비공개 `kesekr` 저장소에 기록된다.
 
 ## 필요한 설정
 
@@ -39,16 +39,16 @@ utterances는 로그인하지 않은 방문자도 댓글을 **읽을 수 있어�
 
 | Secret | 필수 | 용도 |
 |---|---|---|
-| `BLOG_ACCESS_TOKEN` | ✅ | 비공개 `kese-blog` 체크아웃 + 알림 Issue 생성용 fine-grained PAT. 권한: `kese-blog`의 **Contents: Read**, **Issues: Read & write** |
+| `BLOG_ACCESS_TOKEN` | ✅ | 비공개 `kesekr` 체크아웃 + 알림 Issue 생성용 fine-grained PAT. 권한: `kesekr`의 **Contents: Read**, **Issues: Read & write** |
 | `GEMINI_API_KEY` | 선택 | Gemini AI 댓글 분석·모더레이션·추천 답변. 없으면 알림만 동작 |
 
-`BLOG_ACCESS_TOKEN` 생성: GitHub → Settings → Developer settings → Personal access tokens → **Fine-grained tokens** → Repository access에서 `kese-blog`만 선택 → Repository permissions: Contents=Read, Issues=Read and write.
+`BLOG_ACCESS_TOKEN` 생성: GitHub → Settings → Developer settings → Personal access tokens → **Fine-grained tokens** → Repository access에서 `kesekr`만 선택 → Repository permissions: Contents=Read, Issues=Read and write.
 
 ### 3. 환경 변수 (선택, 기본값 있음)
 
 | 변수 | 기본값 | 설명 |
 |---|---|---|
-| `BLOG_OWNER` / `BLOG_REPO` | `kese` / `kese-blog` | 알림 Issue 대상 저장소 |
+| `BLOG_OWNER` / `BLOG_REPO` | `kese` / `kesekr` | 알림 Issue 대상 저장소 |
 | `MODERATORS` | `kese` | 모더레이션 알림 멘션 대상 (쉼표 구분) |
 | `GEMINI_MODEL` | `gemini-3-flash-preview` | 분석 모델 |
 | `BLOG_PATH` | Actions: `blog`, 로컬: `../kesekr` | 블로그 체크아웃 경로 |

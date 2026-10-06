@@ -12,7 +12,7 @@ module.exports = {
   // Notification issues are created in the (private) blog repository.
   GITHUB: {
     OWNER: process.env.BLOG_OWNER || 'kese',
-    REPO: process.env.BLOG_REPO || 'kese-blog',
+    REPO: process.env.BLOG_REPO || 'kesekr',
   },
   // utterances issue-term is pathname, so issue titles look like
   // "/blog/<slug>/" (full https://sof.kr/blog/<slug>/ URLs also match).

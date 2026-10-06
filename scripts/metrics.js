@@ -3,7 +3,7 @@ const config = require('./config');
 /**
  * 월별 metrics Issue에 댓글 알림 이벤트를 기록한다.
  *
- * @param {import('@octokit/rest').Octokit} blogGithub - kese-blog 접근용 Octokit
+ * @param {import('@octokit/rest').Octokit} blogGithub - kesekr 접근용 Octokit
  * @param {Object} eventData
  * @param {string} eventData.postTitle
  * @param {string} eventData.commenter

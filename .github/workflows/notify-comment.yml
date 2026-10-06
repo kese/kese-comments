@@ -19,10 +19,10 @@ jobs:
       - name: Checkout kese-comments (this repo)
         uses: actions/checkout@v4
 
-      - name: Checkout kese-blog
+      - name: Checkout kesekr
         uses: actions/checkout@v4
         with:
-          repository: kese/kese-blog
+          repository: kese/kesekr
           token: ${{ secrets.BLOG_ACCESS_TOKEN }}
           path: blog
 
