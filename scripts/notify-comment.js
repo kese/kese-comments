@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+﻿#!/usr/bin/env node
 
 const yaml = require('js-yaml');
 const fs = require('fs');
@@ -67,10 +67,10 @@ async function notify(context, github) {
   console.log('✅ Extracted slug:', postSlug);
 
   // GitHub Actions에서는 kese-blog가 'blog' 경로에 체크아웃된다.
-  // 로컬에서는 BLOG_PATH 또는 ../sofkr 를 사용한다.
+  // 로컬에서는 BLOG_PATH 또는 ../kesekr 를 사용한다.
   let blogPath = process.env.BLOG_PATH;
   if (!blogPath) {
-    blogPath = !process.env.GITHUB_ACTIONS && fs.existsSync('../sofkr') ? '../sofkr' : 'blog';
+    blogPath = !process.env.GITHUB_ACTIONS && fs.existsSync('../kesekr') ? '../kesekr' : 'blog';
   }
   console.log('📁 Blog path:', blogPath);
 

@@ -51,7 +51,7 @@ utterances는 로그인하지 않은 방문자도 댓글을 **읽을 수 있어�
 | `BLOG_OWNER` / `BLOG_REPO` | `kese` / `kese-blog` | 알림 Issue 대상 저장소 |
 | `MODERATORS` | `kese` | 모더레이션 알림 멘션 대상 (쉼표 구분) |
 | `GEMINI_MODEL` | `gemini-3-flash-preview` | 분석 모델 |
-| `BLOG_PATH` | Actions: `blog`, 로컬: `../sofkr` | 블로그 체크아웃 경로 |
+| `BLOG_PATH` | Actions: `blog`, 로컬: `../kesekr` | 블로그 체크아웃 경로 |
 | `COMMENTS_OWNER` / `COMMENTS_REPO` | `kese` / `kese-comments` | 로컬 테스트 시 읽을 댓글 저장소 |
 
 ## 모더레이션 레벨
@@ -76,7 +76,7 @@ $env:ISSUE_NUMBER='1'; node scripts/notify-comment.js
 $env:BLOG_ACCESS_TOKEN='...'; $env:ENABLE_NOTIFICATION='true'; $env:ISSUE_NUMBER='1'; node scripts/notify-comment.js
 ```
 
-로컬에서는 블로그 저장소를 `../sofkr`에서 자동으로 찾거나 `BLOG_PATH`로 지정한다.
+로컬에서는 블로그 저장소를 `../kesekr`에서 자동으로 찾거나 `BLOG_PATH`로 지정한다.
 
 ## 구조
 
